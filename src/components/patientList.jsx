@@ -13,6 +13,8 @@ export default function PatientList() {
     const [patientsList, setPatientsList] = useState([]);
     const patientsCollectionRef = collection(db,'patients');
 
+    const [searchTerm, setSearchTerm]=useState('');
+
     const getPatients = async()=>{
         try{
             const data = await getDocs(patientsCollectionRef);
@@ -35,20 +37,35 @@ export default function PatientList() {
     const PatientsList =()=>{
         return (
             <div className="w-full max-h-[70vh] overflow-y-auto p-2 ">
-                {patientsList.map((patient)=>{
-                    return (
-                        <div onClick={()=>navigate('/home/patientsList/patientData', {state:{patient:patient}})} key={patient.id} className="w-full  border-2 border-gray-500 rounded-xl p-3 my-2 cursor-pointer flex justify-between items-center">
-                            <div className="flex items-center">
-                                <img src={patient.gander==='male'? maleImage:femaleImage} alt='photo about gander' className="w-[50px] h-[50px] "/>
-                                <div className="">
-                                    <h1 className="text-lg font-bold text-indigo-500">{patient.name}</h1>
-                                    <p className="text-gray-500 text-sm">Age: {patient.age}</p>
+                {   searchTerm===''?
+                        patientsList.map((patient)=>(
+                            
+                                <div onClick={()=>navigate('/home/patientsList/patientData', {state:{patient:patient}})} key={patient.id} className="w-full  border-2 border-gray-500 rounded-xl p-3 my-2 cursor-pointer flex justify-between items-center">
+                                    <div className="flex items-center">
+                                        <img src={patient.gander==='male'? maleImage:femaleImage} alt='photo about gander' className="w-[50px] h-[50px] "/>
+                                        <div className="">
+                                            <h1 className="text-lg font-bold text-indigo-500">{patient.name}</h1>
+                                            <p className="text-gray-500 text-sm">Age: {patient.age}</p>
+                                        </div>
+                                    </div> 
+                                    <p className="text-gray-500 text-sm">Phone: {patient.phoneNumber}</p>
                                 </div>
-                            </div> 
-                            <p className="text-gray-500 text-sm">Phone: {patient.phoneNumber}</p>
-                        </div>
-                    );
-                })}
+                            
+                        )):
+                        patientsList.map((patient)=>(
+                            patient.name.toLowerCase().includes(searchTerm.trim())&&
+                                <div onClick={()=>navigate('/home/patientsList/patientData', {state:{patient:patient}})} key={patient.id} className="w-full  border-2 border-gray-500 rounded-xl p-3 my-2 cursor-pointer flex justify-between items-center">
+                                    <div className="flex items-center">
+                                        <img src={patient.gander==='male'? maleImage:femaleImage} alt='photo about gander' className="w-[50px] h-[50px] "/>
+                                        <div className="">
+                                            <h1 className="text-lg font-bold text-indigo-500">{patient.name}</h1>
+                                            <p className="text-gray-500 text-sm">Age: {patient.age}</p>
+                                        </div>
+                                    </div> 
+                                    <p className="text-gray-500 text-sm">Phone: {patient.phoneNumber}</p>
+                                </div>
+                        ))
+                }
             </div>
         );  
     }
@@ -60,6 +77,7 @@ export default function PatientList() {
                     <h1 className="text-indigo-500 text-xl font-bold">Patients List</h1>
                     <div onClick={()=>navigate('/home/addpatient')} className="bg-green-500 text-white font-bold w-fit p-3 rounded-xl flex gap-2 cursor-pointer hover:bg-green-600 items-center"> <FaPlus /> Add Patient </div>
             </div>
+            <input onChange={e=>setSearchTerm(e.target.value)} type="text" placeholder="Search..." className="bg-gray-100 outline-none p-2 translate-x-1/3 w-[60%]  text-indigo-500 my-3"/>
             <div className="w-[60%] max-h-[70vh]  gap-3  m-auto overflow-y-auto flex flex-wrap p-2 ">
                 {patientsList.length > 0 ? <PatientsList /> : <p className="text-gray-500 text-lg font-bold">No patients found</p>}
             </div>
