@@ -22,10 +22,6 @@ export default function SideBar() {
                     <LayoutDashboard />
                     Dashbord
                 </li>
-                <li className="bg-indigo-300 py-3 m-1 rounded-full flex gap-2 justify-center items-center cursor-pointer hover:bg-indigo-700"> 
-                    A
-                </li>
-                
             </ul>
             
         </div>

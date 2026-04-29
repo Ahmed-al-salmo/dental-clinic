@@ -158,7 +158,7 @@ export default function Dashboard() {
             <div className=" h-full w-[45%] rounded-xl ">
                 <h1 className=" text-center p-3 text-indigo-500 text-xl font-bold">Smart Store</h1>
                 <div onClick={()=>navigate('/home/smartstore')} className="bg-indigo-300  py-3 px-5 rounded-2xl mb-2 text-center text-indigo-600 hover:bg-indigo-400 cursor-pointer">Show Store</div>
-                <div className="bg-indigo-300 h-[300px] overflow-y-auto rounded-2xl ">
+                <div className="bg-gray-200 shadow-lg h-[300px] overflow-y-auto rounded-2xl ">
                     
                     {
                         smartStoreList.map((category)=>(
@@ -193,7 +193,7 @@ export default function Dashboard() {
                     onChange={(e)=>setSearchTerm(e.target.value)}
                     className="w-full h-10 rounded-2xl px-3 mb-3 outline-none bg-gray-200 text-indigo-500"
                 />
-                <div className="bg-indigo-300 h-[300px] overflow-y-auto rounded-2xl ">
+                <div className="bg-gray-200 shadow-lg h-[300px] overflow-y-auto rounded-2xl ">
 
                     {
                         searchTerm ==='' && 

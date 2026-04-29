@@ -142,8 +142,8 @@ export default function Finance(){
 
                     {
                         financeFromDB.length > 0 && 
-                            financeFromDB.map((finance)=>(
-                                <div className="bg-white shadow-lg p-2 m-2 rounded-lg flex gap-3 justify-between items-center">
+                            financeFromDB.map((finance,index)=>(
+                                <div key={index} className="bg-white shadow-lg p-2 m-2 rounded-lg flex gap-3 justify-between items-center">
                                     <div className="flex gap-3 items-center">
                                         {finance.reasonForPay === 'tools' && <FaBox className="text-lime-400" /> }
                                         {finance.reasonForPay === 'repairs' && <FaWrench className="text-yellow-400" /> }
