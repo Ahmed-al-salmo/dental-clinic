@@ -13,7 +13,7 @@ import './App.css'
 
 function App() {
   return(
-    <BrowserRouter>
+    <BrowserRouter path='/dental-clinic/'>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/home/dashbord' element={<Dashbord />} />
